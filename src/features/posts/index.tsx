@@ -28,7 +28,7 @@ const PostPage = () => {
   const [author] = useQueryState("author", { defaultValue: "" });
   const [after] = useQueryState("after", { defaultValue: "" });
   const [before] = useQueryState("before", { defaultValue: "" });
-  const [limit] = useQueryState("limit", { defaultValue: "100" });
+  const [limit] = useQueryState("limit", { defaultValue: "10" });
   const [sort] = useQueryState("sort", { defaultValue: "desc" });
   const [titleQuery] = useQueryState("title", { defaultValue: "" });
   const [selftext] = useQueryState("selftext", { defaultValue: "" });
@@ -52,8 +52,18 @@ const PostPage = () => {
   if (selftext) params.append("selftext", selftext);
   if (urlMatch) params.append("url", urlMatch);
 
-  const hasParams = subreddit || author || after || before || titleQuery || selftext || urlMatch;
-  const { data, error, isLoading } = useSWR(hasParams ? url + params.toString() : null, fetcher);
+  const hasParams =
+    subreddit ||
+    author ||
+    after ||
+    before ||
+    titleQuery ||
+    selftext ||
+    urlMatch;
+  const { data, error, isLoading } = useSWR(
+    hasParams ? url + params.toString() : null,
+    fetcher,
+  );
 
   if (error) return <>Error fetching data</>;
 

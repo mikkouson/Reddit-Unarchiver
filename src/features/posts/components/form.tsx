@@ -30,7 +30,7 @@ export function InputFieldgroup() {
       author: "",
       after: "",
       before: "",
-      limit: "100",
+      limit: "10",
       sort: "desc",
       title: "",
       selftext: "",
@@ -122,7 +122,7 @@ export function InputFieldgroup() {
                 id="fieldgroup-limit"
                 type="number"
                 min="1"
-                placeholder="100"
+                placeholder="10"
                 value={formData.limit}
                 onChange={(e) => handleChange("limit", e.target.value)}
               />
