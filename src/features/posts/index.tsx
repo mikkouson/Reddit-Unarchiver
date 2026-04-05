@@ -52,7 +52,8 @@ const PostPage = () => {
   if (selftext) params.append("selftext", selftext);
   if (urlMatch) params.append("url", urlMatch);
 
-  const { data, error, isLoading } = useSWR(url + params.toString(), fetcher);
+  const hasParams = subreddit || author || after || before || titleQuery || selftext || urlMatch;
+  const { data, error, isLoading } = useSWR(hasParams ? url + params.toString() : null, fetcher);
 
   if (error) return <>Error fetching data</>;
 
@@ -79,7 +80,7 @@ const PostPage = () => {
   return (
     <main className="page-wrap px-4 py-12">
       <InputFieldgroup />
-      {data.data.map((post: any, index: number) => (
+      {data?.data?.map((post: any, index: number) => (
         <Card key={index} className="mt-2">
           <CardHeader className="space-y-2">
             <div>
